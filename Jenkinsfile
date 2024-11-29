@@ -1,4 +1,5 @@
 pipeline {
+    agent none
     stages {
         stage('test-backend') {
             agent { docker { image 'python:3.9-slim' } }
