@@ -9,4 +9,15 @@ pipeline {
             }
         }
     }
+    post {
+        failure {
+            updateGitlabCommitStatus name: 'test', state: 'failed'
+            script {
+                sh "cd ./apiserver/ && git diff -- ."
+            }
+        }
+        success {
+            updateGitlabCommitStatus name: 'test', state: 'success'
+        }
+    }
 }
