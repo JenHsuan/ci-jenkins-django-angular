@@ -32,6 +32,7 @@ pipeline {
                 script {
                     updateGitlabCommitStatus name: 'build-frontend', state: 'running'
                     sh 'cd ui/frontend-workspace'
+                    sh 'ls'
                     sh 'npm install'
                 }
             }
@@ -39,7 +40,7 @@ pipeline {
                 failure {
                     updateGitlabCommitStatus name: 'build-frontend', state: 'failed'
                     script {
-                        sh "cd ./src/ui/frontend-workspace' && git diff -- ."
+                        sh "cd ./ui/frontend-workspace' && git diff -- ."
                     }
                 }
                 success {
