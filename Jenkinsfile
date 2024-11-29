@@ -26,7 +26,8 @@ pipeline {
                 }
             }
         }
-
-        load 'ui/frontend-workspace/Jenkinsfile'
+        script {
+            load 'ui/frontend-workspace/Jenkinsfile'
+        }
     }
 }
