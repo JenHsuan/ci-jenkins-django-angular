@@ -29,11 +29,12 @@ pipeline {
         stage('build-frontend') {
             agent { docker { image 'node:20-bullseye' } }
             steps {
-                script {
-                    updateGitlabCommitStatus name: 'build-frontend', state: 'running'
-                    sh 'cd ui/frontend-workspace'
-                    sh 'ls'
-                    sh 'npm install'
+                dir("${env.WORKSPACE}/ui/frontend-workspace"){
+                    script {
+                        updateGitlabCommitStatus name: 'build-frontend', state: 'running'
+                        sh 'ls'
+                        sh 'npm install'
+                    }
                 }
             }
             post {
