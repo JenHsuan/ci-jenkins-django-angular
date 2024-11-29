@@ -40,8 +40,8 @@ pipeline {
             post {
                 failure {
                     updateGitlabCommitStatus name: 'build-frontend', state: 'failed'
-                    script {
-                        sh "cd ./ui/frontend-workspace' && git diff -- ."
+                    dir("${env.WORKSPACE}/ui/frontend-workspace"){
+                        sh "git diff -- ."
                     }
                 }
                 success {
@@ -69,8 +69,8 @@ pipeline {
             post {
                 failure {
                     updateGitlabCommitStatus name: 'test-frontend', state: 'failed'
-                    script {
-                        sh "cd ./src/ui/frontend-workspace && git diff -- ."
+                    dir("${env.WORKSPACE}/ui/frontend-workspace"){
+                        sh "git diff -- ."
                     }
                 }
                 success {
