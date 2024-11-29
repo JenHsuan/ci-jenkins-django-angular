@@ -1,7 +1,7 @@
 pipeline {
-    agent { docker { image 'python:3.9-slim' } }
     stages {
         stage('test-backend') {
+            agent { docker { image 'python:3.9-slim' } }
             steps {
                 script {
                     updateGitlabCommitStatus name: 'test-backend', state: 'running'
@@ -10,20 +10,20 @@ pipeline {
                     sh 'python3 -m pytest --junitxml=./report/report.xml'
                 }
             }
-        }
-    }
-    post {
-        failure {
-            updateGitlabCommitStatus name: 'test-backend', state: 'failed'
-            script {
-                sh "cd ./apiserver/ && git diff -- ."
+            post {
+                failure {
+                    updateGitlabCommitStatus name: 'test-backend', state: 'failed'
+                    script {
+                        sh "cd ./apiserver/ && git diff -- ."
+                    }
+                }
+                success {
+                    updateGitlabCommitStatus name: 'test-backend', state: 'success'
+                }
+                always {
+                    junit 'report/*.xml'
+                }
             }
-        }
-        success {
-            updateGitlabCommitStatus name: 'test-backend', state: 'success'
-        }
-        always {
-            junit 'report/*.xml'
         }
     }
 }
