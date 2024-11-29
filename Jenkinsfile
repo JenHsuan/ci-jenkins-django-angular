@@ -7,7 +7,7 @@ pipeline {
                     updateGitlabCommitStatus name: 'test', state: 'running'
                     sh 'pip install --upgrade pip'
                     sh 'pip install -r requirements.txt'
-                    sh 'python3 -m pytest'
+                    sh 'python3 -m pytest --junitxml=./report/report.xml'
                 }
             }
         }
@@ -20,7 +20,10 @@ pipeline {
             }
         }
         success {
-            updateGitlabCommitStatus name: 'test', state: 'success'
+            updateGitlabCommitStatus name: 'test-backend', state: 'success'
+        }
+        always {
+            junit 'report/*.xml'
         }
     }
 }
