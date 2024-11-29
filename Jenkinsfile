@@ -25,7 +25,7 @@ pipeline {
                     junit 'report/*.xml'
                 }
             }
-        },
+        }
         stage('build-frontend') {
             agent { docker { image 'node:20-bullseye' } }
             steps {
