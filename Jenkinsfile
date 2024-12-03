@@ -31,7 +31,7 @@ pipeline {
         always {
             // Trigger parameterized build on other projects
             script {
-                def buildResult = build job: 'ci-jenkins'
+                def buildResult = build job: 'ci-jenkins-django-angular-fe'
 
 
             }
