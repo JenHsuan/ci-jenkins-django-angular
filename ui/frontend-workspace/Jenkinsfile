@@ -51,7 +51,7 @@ pipeline {
                     updateGitlabCommitStatus name: 'test-frontend', state: 'success'
                 }
                 always {
-                    junit "${env.WORKSPACE}/ui/frontend-workspaceunit-test-results.xml"
+                    junit "${env.WORKSPACE}/ui/frontend-workspace/unit-test-results.xml"
                 }
             }
         }
