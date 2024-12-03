@@ -31,7 +31,7 @@ pipeline {
         always {
             // Trigger parameterized build on other projects
             script {
-                def buildResult = build job: './ui/frontend-workspace/Jenkinsfile'
+                def buildResult = build job: '/ui/frontend-workspace/Jenkinsfile'
 
 
             }
