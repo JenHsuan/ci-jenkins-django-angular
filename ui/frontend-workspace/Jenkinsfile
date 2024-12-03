@@ -7,7 +7,6 @@ pipeline {
                 dir("${env.WORKSPACE}/ui/frontend-workspace"){
                     script {
                         updateGitlabCommitStatus name: 'build-frontend', state: 'running'
-                        sh 'ls'
                         sh 'npm install'
                     }
                 }
@@ -52,7 +51,7 @@ pipeline {
                     updateGitlabCommitStatus name: 'test-frontend', state: 'success'
                 }
                 always {
-                    junit 'unit-test-results.xml'
+                    junit "${env.WORKSPACE}/ui/frontend-workspaceunit-test-results.xml"
                 }
             }
         }
