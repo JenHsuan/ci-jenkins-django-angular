@@ -35,7 +35,6 @@ pipeline {
                         sh 'export CHROME_BIN=/usr/bin/google-chrome'
                         sh 'npm install -g @angular/cli@^17.3.8'
                         sh 'npm install'
-                        sh 'npm run build'
                         sh 'npm run test:ci'
                     }
                 }
